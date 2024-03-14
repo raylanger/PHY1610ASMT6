@@ -20,6 +20,14 @@ rvector<double> solver(rvector<double> d, rvector<double> off_d, rvector<double>
     info  = LAPACKE_dgtsv(LAPACK_ROW_MAJOR, N, 1,
         du.data(), d.data(), dl.data(), b.data(), 1);
 
-    // Return solution
-    return b;
+    //Initialize vector which holds endpoints, set endpoints
+    rvector<double> v(N+2);
+    v[0] = 0; v[v.size()-1] = 1;
+
+    // Assign b elements to v
+    for (int i = 0; i < b.size(); i++){
+        v[i+1] = b[i];
+    }
+
+    return v;
 }
