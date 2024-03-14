@@ -1,6 +1,7 @@
 #include "solver.h"
 #include "vectors.h"
 #include "output.h"
+#include "eps.h"
 #include <iostream>
 
 int main(int argc, char* argv[]){
@@ -28,14 +29,14 @@ int main(int argc, char* argv[]){
     }
 
     // Get diagonal element vector, off-diagonal element vector, and resultant vector
-    rvector<double> d = get_d(N), off_d = get_offd(N), b = get_b(N);
-
+    rvector<double> d = get_d(N), off_d = get_offd(N), b = get_b(N), epsilon = get_eps(N);
     // Solve Av = b 
     rvector<double> v = solver(d,off_d,b);
 
     //Output v to console and to netcdf file
     std::cout << v << "\n";
-    output(v);
+
+    output(v,epsilon);
 
     return 0;
 }

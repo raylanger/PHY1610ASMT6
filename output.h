@@ -4,5 +4,5 @@
 #include <netcdf>
 #include <rarray>
 
-void output(rvector<double> b);
+void output(rvector<double> b, rvector<double> eps);
 #endif

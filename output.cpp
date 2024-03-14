@@ -4,7 +4,7 @@ using namespace netCDF;
 /*
 Function for taking vector b and outputting to netCDF file
 */
-void output(rvector<double> b){
+void output(rvector<double> b, rvector<double> eps){
 
     //Initialize netCDF file Potential.nc
     NcFile* dataFile = new NcFile("Potential.nc", NcFile::replace); 
@@ -13,10 +13,12 @@ void output(rvector<double> b){
     NcDim x = dataFile->addDim("x", b.size());
 
     // Create a variable V, which is a double dependent on x
-    NcVar data = dataFile->addVar("V", ncDouble, x);
-    
+    NcVar V = dataFile->addVar("V", ncDouble, x);
+    NcVar e = dataFile->addVar("epsilon", ncDouble, x);
+
     // Assign variable V to be b
-    data.putVar(&b[0]);
+    V.putVar(&b[0]);
+    e.putVar(&eps[0]);
 
     delete dataFile;
 }

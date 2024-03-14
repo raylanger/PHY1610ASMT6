@@ -10,7 +10,7 @@ all: ASMT6
 ASMT6: main.o eps.o vectors.o solver.o output.o
 	$(CXX) $(LDFLAGS) -o $@ $^ -lopenblas -llapacke -lnetcdf -lnetcdf_c++4
 
-main.o: main.cpp solver.h vectors.h
+main.o: main.cpp solver.h vectors.h eps.h output.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $< 
 
 vectors.o: vectors.cpp vectors.h eps.h
